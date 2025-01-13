@@ -90,3 +90,14 @@ startGameBtn.addEventListener('click', () => {
     gameIsRunning = false;
 });
 
+
+const sumUp = (...numbers) => {
+    let sum = 0;
+    for (const num of numbers) {
+        sum += num;
+    }
+    return sum;
+}
+
+console.log(sumUp(1, 3, 29, 84, 4, 7, 9));
+console.log(sumUp(1, 3, 29, 84, 4, 7, 9, -12, 173, 33));
