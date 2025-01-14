@@ -18,7 +18,8 @@ const getPlayerChoice = () => {
     const selection = prompt(`Pick one: ${ROCK}, ${PAPER} or ${SCISSORS}?`, '').toUpperCase();
     if (selection !== ROCK &&
         selection !== PAPER &&
-        selection !== SCISSORS
+        selection !== SCISSORS ||
+        selection === null
     ) {
         alert(`Invalid choice! We chose ${DEFAULT_USER_CHOICE} for you!`);
         return;
@@ -70,7 +71,7 @@ startGameBtn.addEventListener('click', () => {
     const computerChoice = getComputerChoice();
     let winner;
     if (playerChoice) {
-        const winner = getWinner(computerChoice, playerChoice);
+        winner = getWinner(computerChoice, playerChoice);
     } else {
         winner = getWinner(computerChoice);
     }
@@ -90,14 +91,31 @@ startGameBtn.addEventListener('click', () => {
     gameIsRunning = false;
 });
 
+//   --------    -------------     ----------    ------------     ------------
 
-const sumUp = (...numbers) => {
+// EXTRA SECTION ABOUT ADDING AND SUBTRACTING
+
+const combine = (resultHandler, operation, ...numbers) => {
+
+    const validateNumber = number => {
+        return isNaN(number) ? 0 : number;
+    };
     let sum = 0;
     for (const num of numbers) {
-        sum += num;
+        if (operation === 'ADD') {
+            sum += validateNumber(num);
+        } else{
+            sum -= validateNumber(num);
+        }
     }
-    return sum;
+    resultHandler(sum);
+};
+
+
+const showResult = (messageText, result) => {
+    alert(messageText + ' ' + result)
 }
 
-console.log(sumUp(1, 3, 29, 84, 4, 7, 9));
-console.log(sumUp(1, 3, 29, 84, 4, 7, 9, -12, 173, 33));
+console.log(combine(showResult.bind(this, 'The result after adding all the numbers is'), 'ADD', 3, 29, 84, 4, 7, 9));
+console.log(combine(showResult.bind(this, 'The result after adding all the numbers is'), 'ADD', 3, 29, 84, 'Hi', 9, -12, 173, 33));
+console.log(combine(showResult.bind(this, 'The result after subtracting all the numbers is'), 'SUBTRACT', 1, 3, 29, -12, 173, 33));
