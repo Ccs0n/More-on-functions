@@ -40,13 +40,7 @@ const getComputerChoice = () => {
 }
 
 // logic behind winner choice
-// const getWinner = (cChoice, pChoice) =>
-//     cChoice === pChoice
-//         ? RESULT_DRAW : (cChoice === ROCK && pChoice === PAPER) ||
-//         (cChoice === PAPER && pChoice === SCISSORS) ||
-//         (cChoice === SCISSORS && pChoice === ROCK)
-//             ? RESULT_WIN
-//             : RESULT_LOSE;
+
 const getWinner = (cChoice, pChoice = DEFAULT_USER_CHOICE) => {
     if(cChoice === pChoice) {
         return RESULT_DRAW;
